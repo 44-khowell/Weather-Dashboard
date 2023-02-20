@@ -1,0 +1,46 @@
+p {
+    border:1px solid lightgrey;
+    padding: 5px;
+}
+
+/*
+#forcast.row.dailyForecast cardContainer1 {
+    width: 5rem;
+}
+*/
+
+
+.row {
+    padding-left: 2px;    /* targetting row.dailyForecast */
+}
+
+.flex-container {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: left; 
+}
+
+.nowrap  { 
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+p.flex-item {
+    background: rgb(149, 165, 224);
+    padding: 15px;
+    width: 170px;
+    height: 200px;
+    padding-left: 20px;
+    margin: 10px;
+}
+/*
+.slide {
+    float: left;
+  }
+flex-wrap: nowrap;
+ white-space: nowrap;
+ overflow:auto;
+display: inline-flex;
+  display: inline-block;
+  */
