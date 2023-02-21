@@ -1,4 +1,4 @@
-// Variables for html Tags 
+//Declared variables linked to html Tags
 let todayDiv = document.querySelector('#today');
 console.log("#today" ,todayDiv); 
 
@@ -98,6 +98,26 @@ console.log("#today" ,todayDiv);
 
 
 
+// Globle variables 
+let cityName = ""; // stores user input
+
+
+// Function for clearing prevoius Child elements data 
+function clearChildDiv (targetDiv) {
+    while (targetDiv.firstChild) {
+        targetDiv.removeChild(targetDiv.firstChild);
+    }
+}
+
+// show error message modal
+function showErrorMsg(errorCode, errorMsg) {
+    $("#error-code").text("Error: "+errorCode);
+    $("#error-msg").text(errorMsg);
+    console.log(errorMsg);
+    // alert(errorMsg);
+}
+
+
 // ======================  API 1st Data Request Lat & Lon  =======================
 function getCityLatnLonCoOrd(city) { 
 
@@ -123,7 +143,7 @@ function getCityLatnLonCoOrd(city) {
     })
     // Use this to catch unforseen errors that may occur 
     .catch(function (error) {
-        console.log("An error occurred in lat & lon ");
+        console.log("002","An error: incorrect data received for lat & lon ");
     });
 }
 
@@ -177,13 +197,13 @@ function getTodayWeatherData(coOrdLat, coOrdLon) {
     })
     // Use this to catch unforseen errors that may occur 
     .catch(function (error) {
-        console.log("An error occurred in weather request");
+        console.log("003", "An error: incorrect parameter received in weather request");
     });
     // function -end 
 }
 
-let place = 'London';
-var coOrdArr = getCityLatnLonCoOrd(place);
+// let place = 'London';
+// var coOrdArr = getCityLatnLonCoOrd(place);
 
 
 // // return an icon URL for img tag
@@ -200,4 +220,25 @@ var coOrdArr = getCityLatnLonCoOrd(place);
 
 // CLICK HANDLERS
 // ==========================================================
+
+// handling the search city action user input =
+$("#search-button").on("click", function(event) {
+  // Preventing the submit button from trying to submit the form
+  event.preventDefault();
+
+   // Here we grab the text from the input box
+  cityName = $("#search-input").val().trim();
+  console.log('cityname',cityName);
+
+  if (cityName === "") {
+    showErrorMsg("001","Please enter a city name to search.");
+    return;
+  }
+  // At id=Today (Tag) Clear any data at from previous search 
+  clearChildDiv (todayDiv);
+
+  // Get the co-ordinates for the place being searched
+  getCityLatnLonCoOrd(cityName);
+
+});
 
