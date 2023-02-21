@@ -2,6 +2,8 @@
 let todayDiv = document.querySelector('#today');
 console.log("#today" ,todayDiv); 
 
+const historyDiv = $('#history');
+
 // Build the query URL for the Fetch request to the OpenWeather API
 
 // City Search API
@@ -100,7 +102,7 @@ console.log("#today" ,todayDiv);
 
 // Globle variables 
 let cityName = ""; // stores user input
-
+let cityList = []; // for showing history buttons
 
 // Function for clearing prevoius Child elements data 
 function clearChildDiv (targetDiv) {
@@ -116,6 +118,34 @@ function showErrorMsg(errorCode, errorMsg) {
     console.log(errorMsg);
     // alert(errorMsg);
 }
+
+
+// Storage Variables 
+var foundCity = localStorage.getItem('cityName');    // Used to get value of City Searched
+
+// Local Storage functions 
+// Store value of Cities Searched and list History of items prevoiusly searched 
+function appendToStoreCitySearch(foundCity) {
+    
+    if (!cityList.includes(foundCity)) {
+        cityList.push(foundCity);
+        historyDiv.append(`<button class="btn btn-primary mb-2 city" data-city="${foundCity}"> ${foundCity} </button> `);
+        localStorage.setItem("cityName", cityList.toString());
+    }             
+}
+
+/// ======= To modify ===============
+function renderCitySearches() {
+
+    cityhistory = localStorage.getItem('cityName');    // Used to get value of City Searched 
+
+    // Check if fetched storage variable is empty before displaying to page 
+    if (cityhistory === null) {
+    return;
+    }  
+    return cityhistory;
+}
+
 
 
 // ======================  API 1st Data Request Lat & Lon  =======================
@@ -202,6 +232,7 @@ function getTodayWeatherData(coOrdLat, coOrdLon) {
     // function -end 
 }
 
+
 // let place = 'London';
 // var coOrdArr = getCityLatnLonCoOrd(place);
 
@@ -234,6 +265,13 @@ $("#search-button").on("click", function(event) {
     showErrorMsg("001","Please enter a city name to search.");
     return;
   }
+  
+  console.log(typeof(cityName));
+
+  // Store search City in Local Storage - History
+  appendToStoreCitySearch(cityName);
+
+
   // At id=Today (Tag) Clear any data at from previous search 
   clearChildDiv (todayDiv);
 
