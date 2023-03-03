@@ -1,13 +1,14 @@
 //Declared variables linked to html Tags
 let todayDiv = document.querySelector('#today');
+let forecastDiv = document.querySelector('#forecast');
 console.log("#today" ,todayDiv); 
 let cardDate0 = document.querySelector('#card-date0');
 let cardDate1 = document.querySelector('#card-date1');
 let cardDate2 = document.querySelector('#card-date2');
 let cardDate3 = document.querySelector('#card-date3');
 let cardDate4 = document.querySelector('#card-date4');
-let cardLi0 = document.querySelector('#card-li0');
-
+//let cardLi0 = document.querySelector('#card-li0');
+var index = 0;
 const historyDiv = $('#history');
 
 
@@ -122,10 +123,13 @@ function getTodayWeatherData(coOrdLat, coOrdLon) {
     
         // Appending weather info to today tag
         var tagH3 = document.createElement("h3");
+        var icon = document.createElement('img');
+        icon.setAttribute('src',"http://openweathermap.org/img/wn/"+result.list[0].weather[0].icon+"@2x.png")
         tagH3.textContent = result.city.name + ' ('+displayDate+ ')';
+        tagH3.appendChild(icon);
         todayDiv.appendChild(tagH3);
     
-    
+        
         tagP = document.createElement("p");
         tagP.textContent = 'Temp: ' +tempcalc.toFixed(2) +' °C ';
         todayDiv.appendChild(tagP);
@@ -142,18 +146,18 @@ function getTodayWeatherData(coOrdLat, coOrdLon) {
 
          // Extracting components temp, wind & humidty from the API response returns 
         // Extract date from dt_txt:
-        console.log(result.list[8].dt_txt);
-        let date8 = result.list[8].dt_txt;
-        // Split string returned into an Array 
-        const dateArr8 = date8.split(' ');
-        // Now extract the date from the array
-        displayDate = dateArr8[0];
+        // console.log(result.list[8].dt_txt);
+        // let date8 = result.list[8].dt_txt;
+        // // Split string returned into an Array 
+        // const dateArr8 = date8.split(' ');
+        // // Now extract the date from the array
+        // displayDate = dateArr8[0];
 
-        let tempcalc8 = (result.list[8].main.temp - 32)*5/9 -128;
-        console.log(tempcalc8.toFixed(2));
-        console.log(result.list[8].wind.speed);
-        console.log(result.list[8].main.humidity);
-        console.log(result.list[8].weather[0].icon);
+        // let tempcalc8 = (result.list[8].main.temp - 32)*5/9 -128;
+        // console.log(tempcalc8.toFixed(2));
+        // console.log(result.list[8].wind.speed);
+        // console.log(result.list[8].main.humidity);
+        // console.log(result.list[8].weather[0].icon);
 
 
         //tagP = document.createElement("li");
@@ -165,17 +169,17 @@ function getTodayWeatherData(coOrdLat, coOrdLon) {
         // newLi.appendChild(newId);
 
         // Arrays data & 5-day positions 
-        let threeHrInt = ['0','8','16','32','40'];
-        let cardArr = ["cardDate0","cardDate1","cardDate2","cardDate3","cardDate4"];
+        let threeHrInt = ['0','8','16','24','32'];
+        let cardArr = [cardDate0, cardDate1, cardDate2, cardDate3, cardDate4];
        
 
         //console.log(cardArr);
 
         // Create ul list for each card 
-        tagUl = document.createElement('ul');
+        //tagUl = document.createElement('ul');
             for (let forecastPos = 0; forecastPos <= 4; forecastPos++) {
                 console.log('in for loop');
-                tagUl.setAttribute('style','list-style-type: none; margin: 0; padding: 0;');
+               // tagUl.setAttribute('style','list-style-type: none; margin: 0; padding: 0;');
                 // newLi = document.createElement('li');
                 // tagUl.appendChild(newLi);
 
@@ -185,6 +189,7 @@ function getTodayWeatherData(coOrdLat, coOrdLon) {
                 populateCardTemp(cardArr[forecastPos], threeHrInt[forecastPos]);
                 populateCardWind(cardArr[forecastPos], threeHrInt[forecastPos]);
                 populateCardHumidity(cardArr[forecastPos], threeHrInt[forecastPos]);
+                index++
             }
 
 
@@ -192,11 +197,13 @@ function getTodayWeatherData(coOrdLat, coOrdLon) {
                 console.log('incomingCardPos: ', cardPosition);
                 console.log('3hrArr val: ', timeOfDay);
 
-                if (cardPosition === "cardDate0") {
-                    newLi = document.createElement('li');
-                    tagUl.appendChild(newLi);
-                    cardDate0.appendChild(tagUl);
-
+                //var tagUl = document.createElement('ul');
+                //tagUl.setAttribute('style','list-style-type: none; margin: 0; padding: 0;');
+               // if (cardPosition === "cardDate0") {
+                    var newLi = document.createElement('li');
+                    //tagUl.appendChild(newLi);
+                  //  cardDate0.appendChild(tagUl);
+                   cardPosition.appendChild(newLi)
                     // Extract date from dt_txt:
                     console.log(result.list[timeOfDay].dt_txt);
                     let date8 = result.list[timeOfDay].dt_txt;
@@ -212,56 +219,61 @@ function getTodayWeatherData(coOrdLat, coOrdLon) {
                 //     tagUl.appendChild(newLi);
                 //     cardDate1.appendChild(tagUl);
                 //     newLi.textContent = result.list[timeOfDay].weather[0].icon;
-                }
+           //     }
             }
 
             function populateCardIcon(cardPosition, timeOfDay) {
                 console.log('incomingCardPos: ', cardPosition);
                 console.log('3hrArr val: ', timeOfDay);
 
-                if (cardPosition === "cardDate0") {
-                    newLi = document.createElement('li');
-                    tagUl.appendChild(newLi);
-                    cardDate0.appendChild(tagUl);
-                    newLi.textContent = result.list[timeOfDay].weather[0].icon;                    
-                }
+               // if (cardPosition === "cardDate0") {
+                    var newLi = document.createElement('li');
+                    var icon = document.createElement('img');
+                    icon.setAttribute('src',"http://openweathermap.org/img/wn/"+result.list[timeOfDay].weather[0].icon+"@2x.png")
+                    //var tagUl = document.createElement('ul');
+                    //tagUl.setAttribute('style','list-style-type: none; margin: 0; padding: 0;');
+                    newLi.appendChild(icon);
+                   // tagUl.appendChild(newLi);
+                    cardPosition.appendChild(newLi);
+                   // newLi.textContent = result.list[timeOfDay].weather[0].icon;                    
+              //  }
             }
 
             function populateCardTemp(cardPosition, timeOfDay) {
                 console.log('incomingCardPos: ', cardPosition);
                 console.log('3hrArr val: ', timeOfDay);
 
-                if (cardPosition === "cardDate0") {
-                    newLi = document.createElement('li');
-                    tagUl.appendChild(newLi);
-                    cardDate0.appendChild(tagUl);
+               // if (cardPosition === "cardDate0") {
+                   var newLi = document.createElement('li');
+                   // tagUl.appendChild(newLi);
+                    cardPosition.appendChild(newLi);
                     let tempcalc18 = (result.list[timeOfDay].main.temp - 32)*5/9 -128;
                     newLi.textContent = 'Temp: ' +tempcalc18.toFixed(2) +' °C ';                   
-                }
+               // }
             }
 
             function populateCardWind(cardPosition, timeOfDay) {
                 console.log('incomingCardPos: ', cardPosition);
                 console.log('3hrArr val: ', timeOfDay);
 
-                if (cardPosition === "cardDate0") {
-                    newLi = document.createElement('li');
-                    tagUl.appendChild(newLi);
-                    cardDate0.appendChild(tagUl);
+                //if (cardPosition === "cardDate0") {
+                   var newLi = document.createElement('li');
+                    //tagUl.appendChild(newLi);
+                    cardPosition.appendChild(newLi);
                     newLi.textContent = 'Wind: '+result.list[timeOfDay].wind.speed + ' KPH';                    
-                }
+               // }
             }
 
             function populateCardHumidity(cardPosition, timeOfDay) {
                 console.log('incomingCardPos: ', cardPosition);
                 console.log('3hrArr val: ', timeOfDay);
 
-                if (cardPosition === "cardDate0") {
-                    newLi = document.createElement('li');
-                    tagUl.appendChild(newLi);
-                    cardDate0.appendChild(tagUl);
+                //if (cardPosition === "cardDate0") {
+                    var newLi = document.createElement('li');
+                    ///tagUl.appendChild(newLi);
+                    cardPosition.appendChild(newLi);
                     newLi.textContent = 'Humidity: '+result.list[timeOfDay].main.humidity + ' %';                    
-                }
+                //}
             }
 
         // tagUl = document.createElement('ul');
@@ -295,45 +307,45 @@ function getTodayWeatherData(coOrdLat, coOrdLon) {
 
 
         // Extract date from dt_txt:
-        console.log(result.list[16].dt_txt);
-        let date16 = result.list[16].dt_txt;
-        // Split string returned into an Array 
-        const dateArr16 = date16.split(' ');
-        // Now extract the date from the array
-        displayDate = dateArr16[16];
-        let tempcalc16 = (result.list[16].main.temp - 32)*5/9 -128;
-        console.log(tempcalc16.toFixed(2));
-        console.log(result.list[16].wind.speed);
-        console.log(result.list[16].main.humidity);
-        console.log(result.list[16].weather[0].icon);
+        // console.log(result.list[16].dt_txt);
+        // let date16 = result.list[16].dt_txt;
+        // // Split string returned into an Array 
+        // const dateArr16 = date16.split(' ');
+        // // Now extract the date from the array
+        // displayDate = dateArr16[16];
+        // let tempcalc16 = (result.list[16].main.temp - 32)*5/9 -128;
+        // console.log(tempcalc16.toFixed(2));
+        // console.log(result.list[16].wind.speed);
+        // console.log(result.list[16].main.humidity);
+        // console.log(result.list[16].weather[0].icon);
 
 
-        // Extract date from dt_txt:
-        console.log(result.list[24].dt_txt);
-        let date24 = result.list[24].dt_txt;
-        // Split string returned into an Array 
-        const dateArr24 = date24.split(' ');
-        // Now extract the date from the array
-        displayDate = dateArr24[24];
-        let tempcalc24 = (result.list[24].main.temp - 32)*5/9 -128;
-        console.log(tempcalc24.toFixed(2));
-        console.log(result.list[24].wind.speed);
-        console.log(result.list[24].main.humidity);
-        console.log(result.list[24].weather[0].icon);
+        // // Extract date from dt_txt:
+        // console.log(result.list[24].dt_txt);
+        // let date24 = result.list[24].dt_txt;
+        // // Split string returned into an Array 
+        // const dateArr24 = date24.split(' ');
+        // // Now extract the date from the array
+        // displayDate = dateArr24[24];
+        // let tempcalc24 = (result.list[24].main.temp - 32)*5/9 -128;
+        // console.log(tempcalc24.toFixed(2));
+        // console.log(result.list[24].wind.speed);
+        // console.log(result.list[24].main.humidity);
+        // console.log(result.list[24].weather[0].icon);
 
 
-        // Extract date from dt_txt:
-        console.log(result.list[32].dt_txt);
-        let date32 = result.list[32].dt_txt;
-        // Split string returned into an Array 
-        const dateArr32 = date32.split(' ');
-        // Now extract the date from the array
-        displayDate = dateArr32[32];
-        let tempcalc32 = (result.list[32].main.temp - 32)*5/9 -128;
-        console.log(tempcalc32.toFixed(2));
-        console.log(result.list[32].wind.speed);
-        console.log(result.list[32].main.humidity);
-        console.log(result.list[32].weather[0].icon);
+        // // Extract date from dt_txt:
+        // console.log(result.list[32].dt_txt);
+        // let date32 = result.list[32].dt_txt;
+        // // Split string returned into an Array 
+        // const dateArr32 = date32.split(' ');
+        // // Now extract the date from the array
+        // displayDate = dateArr32[32];
+        // let tempcalc32 = (result.list[32].main.temp - 32)*5/9 -128;
+        // console.log(tempcalc32.toFixed(2));
+        // console.log(result.list[32].wind.speed);
+        // console.log(result.list[32].main.humidity);
+        // console.log(result.list[32].weather[0].icon);
 
     })
     // Use this to catch unforseen errors that may occur 
@@ -356,6 +368,13 @@ $("#search-button").on("click", function(event) {
   cityName = $("#search-input").val().trim();
   console.log('cityname',cityName);
 
+// At id=card-dateX (Tag) Clear any data at from previous search (ready for the next search)
+  clearChildDiv (cardDate0);
+  clearChildDiv (cardDate1);
+  clearChildDiv (cardDate2);
+  clearChildDiv (cardDate3);
+  clearChildDiv (cardDate4);
+
   if (cityName === "") {
     showErrorMsg("001","Please enter a city name to search.");
     return;
@@ -369,6 +388,10 @@ $("#search-button").on("click", function(event) {
 
   // At id=Today (Tag) Clear any data at from previous search 
   clearChildDiv (todayDiv);
+
+// At id=forecast (Tag) Clear any data at from previous search 
+ // clearChildDiv (cardDate0);
+
 
   // Get the co-ordinates for the place being searched
   getCityLatnLonCoOrd(cityName);
