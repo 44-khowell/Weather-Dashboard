@@ -89,7 +89,7 @@ The following image shows the web application's final appearance and functionali
  
  ## Credits :pushpin:
 
- Refernces
+The started code was provided by Trilogy Education.
 
 ## License :pushpin:
  
