@@ -83,7 +83,7 @@ The following image shows the web application's final appearance and functionali
  
  My GitHub Link: https://github.com/44-khowell/Weather-Dashboard
  
- URL of the deployed application: 
+ URL of the deployed application: https://44-khowell.github.io/Weather-Dashboard/
  
  
  
