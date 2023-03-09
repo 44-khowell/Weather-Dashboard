@@ -61,13 +61,25 @@ The user is presented with a Weather Dash Board
  
   Action: The 5-day forecast Cards key data items are also appended to <id> representing them
  
+ HTML Page Construction Components
+ 
+   - Bootstrap Jumbotron Header
+   - x1 Search Field 
+   - x1 BUTTON - linked to search field 
+   - x6 BUTTON’s - Dynamically created when chosen City is selected 
+   - x1 Location Display (Form)
+   - x5 (5-day Forecast) Cards
  
  
 ## Mock-Up
 
-The following image shows the web application's appearance and functionality:
+The following image shows the web application's final appearance and functionality:
 
-![The weather app includes a search option, a list of cities, and a five-day forecast and current weather conditions for London.](./img-assets/10-server-side-apis-challenge-demo.png)
+ 
+ ![Weather-Dashboard-Demo](https://user-images.githubusercontent.com/119610043/224177604-aeb55699-df45-475d-b0b1-7a3a0f7b5d2c.png)
+
+ 
+ 
 
 ## Grading Requirements
 
