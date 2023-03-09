@@ -1,16 +1,14 @@
 # Module 8 Server-Side APIs: Weather Dashboard
 
-## Your Task
+## Description
 
-Server APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
+For this project given the outline of my On-the-job ticket, my main objectives is to:
 
-Use the [5 Day Weather Forecast](https://openweathermap.org/forecast5) to retrieve weather data for cities. The link should take you to a guide on how to use the 5 Day Forecast API. You will need to register for an API key in order to use this API. After registering for a new API key, you may need to wait up to 2 hours for that API key to activate.
+  * Use Server APIs to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
 
-The base URL for your API calls should look like the following: `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}`.
+  * To achieve this aim, this app will use the 5 Day Weather Forecast API from openweathermap.org to retrieve 
+weather data for cities around the world.
 
-**Hint**: Using the 5 Day Weather Forecast API, you'll notice that you will need to pass in coordinates instead of just a city name. Using the OpenWeatherMap APIs, how could we retrieve geographical coordinates given a city name?
-
-You will use `localStorage` to store any persistent data. For more information on how to work with the OpenWeather API, refer to the [Full-Stack Blog on how to use API keys](https://coding-boot-camp.github.io/full-stack/apis/how-to-use-api-keys).
 
 ## User Story
 
@@ -22,22 +20,49 @@ SO THAT I can plan a trip accordingly
 
 ## Acceptance Criteria
 
-* Create a weather dashboard with form inputs.
-  * When a user searches for a city they are presented with current and future conditions for that city and that city is added to the search history
-  * When a user views the current weather conditions for that city they are presented with:
-    * The city name
-    * The date
-    * An icon representation of weather conditions
-    * The temperature
-    * The humidity
-    * The wind speed
-  * When a user view future weather conditions for that city they are presented with a 5-day forecast that displays:
-    * The date
-    * An icon representation of weather conditions
-    * The temperature
-    * The humidity
-  * When a user click on a city in the search history they are again presented with current and future conditions for that city
+The user is presented with a Weather Dash Board 
+ 
+* Search Field: - User enters City to be searched 
 
+                - Search button is then clicked x7 things happen 
+                - User is presented with selected city in Central view 
+                - The Location is listed	
+                - Current Date 
+                - Weather Icon displayed
+                - Temp displayed
+                - Wind displayed
+                - Humidity displayed		            
+
+  Action: An eventListener() is actioned to GET a response from OpenWeatherMap URL
+  
+  Action: The response is read and Key items extracted 
+  
+  Action: The Key data items are appended to <id> within Central view of the form within the Html page (City, Date, Temp, Wind, Humidity, Icon)
+
+  Action: The 5-day forecast Cards key data items are also appended to <id> representing them (Date,Temp, Wind, Humidity, Icon)
+
+  Action: The user input Search value stored
+ 
+  Action: The chosen City is added as Search history as a Button
+ 
+ * Search History: - User clicks on a city listed from an earlier search history 
+ 
+                   - The user is presented with this city and it becomes the Central view 
+                   - The Key data items are updated with the current weather conditions
+                   - The 5-day forecast Cards key data items also updated to feature future weather conditions ahead 
+ 
+  Action: - An eventLister() is action to GET Past searched (City name) from storage 
+ 
+         - The Same eventLister() is action to GET a response from OpenWeatherMap URL (using the stored City name)
+ 
+  Action: The GET a response from OpenWeatherMap URL is read and Key items extracted 
+ 
+  Action: The Key data items are appended to <id> within Central view of the form within the Html page
+ 
+  Action: The 5-day forecast Cards key data items are also appended to <id> representing them
+ 
+ 
+ 
 ## Mock-Up
 
 The following image shows the web application's appearance and functionality:
