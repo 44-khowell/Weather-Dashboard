@@ -20,6 +20,8 @@ SO THAT I can plan a trip accordingly
 
 ## Acceptance Criteria
 
+Presudocode
+
 The user is presented with a Weather Dash Board 
  
 * Search Field: - User enters City to be searched 
