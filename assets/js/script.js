@@ -52,7 +52,7 @@ function getCityLatnLonCoOrd(city) {
 
     let limit = 5;
 
-    let openWeatherQueryUrl1 = "http://api.openweathermap.org/geo/1.0/direct?q="+city+"&limit="+limit+"&appid="+apiKey;
+    let openWeatherQueryUrl1 = "https://api.openweathermap.org/geo/1.0/direct?q="+city+"&limit="+limit+"&appid="+apiKey;
 
     fetch(openWeatherQueryUrl1)
     .then(response => response.json())
